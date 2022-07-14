@@ -1,0 +1,715 @@
+#  -----------------------------------------------------------------------
+#   .* APLICATIVO COM KIVY - PYTHON - FIREBASE *.
+# 
+#    tela.kv - Arquivo com design e contrução das telas.
+# 
+#    Copyright 2022 Ludmila Dias
+# 
+#   ----------------------------------------------------------------------
+
+#:import get_color_from_hex kivy.utils.get_color_from_hex
+
+<Manager>:
+
+    #TELA DE LOGIN
+    LoginScreen:
+        name: "login"
+    #DASHBOARD 
+    HomePage:
+        name: "home_page"
+    #ALTERAR SENHA
+    ResetPassword:
+        name: "reset_password"
+    #NOVA SENHA
+    NewPassword:
+        name: "new_password"
+    #CADASTRO
+    Register:
+        name: "register"
+    #TELA DE AGENDAMENTOS
+    Agendar:
+        name: "agendar"
+    #TELA DE AGENDAR CONSULTA
+    AgendamentoConsulta:
+        name:"agendar_consulta"
+    #TELA DE AGENDAR RETIRADA
+    AgendamentoRetirada:
+        name:"agendar_retirada"
+    #TELA TABELA PACIENTES
+    TabelaPacientes:
+        name:"tabela_pacientes"
+    #TELA TABELA MEDICAMENTOS
+    TabelaMedicamentos:
+        name:"tabela_medicamentos"
+    #TELA PERFIL FUNCIONARIO
+    Perfil:
+        name: "perfil"
+    #TELA PARA EDITAR DADOS
+    EditarDados:
+        name: "editar_dados"
+
+
+<LoginScreen>:
+    FloatLayout:
+        Image:
+            source: "img\icon.png"
+            size_hint: (.4, .4)
+            pos_hint: {"center_x": .5, "center_y": .78}
+        MDLabel:
+            text: "Seja Bem-vindo!"
+            pos_hint: {"center_x": .5, "center_y": .62}
+            halign: "center"
+            bold: True
+            font_style: "H5"
+        MDLabel:
+            text: "Faça login para continuar."
+            pos_hint: {"center_x": .5, "center_y": .58}
+            halign: "center"
+            font_style: "Caption"
+        MDTextField:
+            hint_text: "CPF"
+            size_hint_x: .8
+            pos_hint: {"center_x": .5, "center_y": .5}
+            icon_right: "cpf"
+            icon_right_color: app.theme_cls.primary_color
+            id: text_email
+        MDTextField:
+            hint_text: "Senha"
+            size_hint_x: .8
+            pos_hint: {"center_x": .5, "center_y": .4}
+            icon_right: "lock"
+            password: True
+            icon_right_color: app.theme_cls.primary_color
+            id: text_password
+        MDBoxLayout:
+            padding: dp(40)
+            spacing: dp(5)
+            MDLabel:
+                text: ""
+                color: 0.18, 0.53, 1, 1
+                pos_hint: {"center_x": .5, "center_y": .33}
+                id: label_login
+            MDTextButton:
+                text: "Redefinir senha."
+                pos_hint: {"center_x": .5, "center_y": .33}
+                on_release: app.root.current = "reset_password"
+        MDFillRoundFlatIconButton:
+            text: "Entrar"
+            font_size: 20
+            elevation: 8
+            theme_text_color: "Custom"
+            text_color: 254/255.0, 254/255.0, 254/255.0, 1
+            md_bg_color: 0.2, 0.7, 0.8, 0.7
+            pos_hint: {"center_x": .5, "center_y": .23}
+            size_hint_x: .8
+            icon: "login"
+            on_release: root.try_sign_in()
+        MDFillRoundFlatIconButton:
+            text: "Cadastrar"
+            font_size: 20
+            elevation: 8
+            theme_text_color: "Custom"
+            text_color: 254/255.0, 254/255.0, 254/255.0, 1
+            md_bg_color: 0.18, 0.53, 1, 1
+            pos_hint: {"center_x": .5, "center_y": .12}
+            size_hint_x: .8
+            icon: "plus"
+            on_release: app.root.current = "register"
+
+<HomePage>:
+    FitImage:
+        source:"img\simage.png"
+    MDBoxLayout:
+        orientation:'vertical'
+        MDBoxLayout:
+            padding:dp(30)
+            spacing:dp(10)
+            size_hint_y:.25
+            MDBoxLayout:
+                orientation:"vertical"
+                MDLabel:
+                    text:"Bem-Vindo(a)"
+                    font_style:"H6"
+                MDLabel:
+                    text:""
+                    font_style:"H4"
+                    id: label_nome
+                MDBoxLayout:
+                    padding:[dp(0),dp(40),dp(0),dp(0)]
+                    spacing:dp(10)
+                    MDLabel:
+                        text:"Home"
+                        text_size:None,None
+                        adaptive_width:True
+                    MDIcon:
+                        icon:'chevron-down'
+
+            MDIconButton:
+                padding:[dp(0),dp(40),dp(0),dp(0)]
+                icon:"logout"
+                on_release: root.logout()
+        MDGridLayout:
+            size_hint_y:.75
+            cols:2
+            padding:[dp(15),dp(15),dp(15),dp(35)]
+            spacing:dp(15)
+            ElementCard:
+                image:"img\id-card.png"
+                text:"Meu Perfil"
+                on_release: app.root.current = "perfil"
+
+            ElementCard:
+                image:"img\clock.png"
+                text:"Fazer Agendamento"
+                on_release: app.root.current = "agendar"
+
+            ElementCard:
+                image:"img\desk.png"
+                text:"Medicamentos"
+                on_release: app.root.current = "tabela_medicamentos"
+
+            ElementCard:
+                image:"img\steamwork.png"
+                text:"Pacientes"
+                on_release: app.root.current = "tabela_pacientes"
+
+<ElementCard@MDCard>:
+    md_bg_color:1,1,1,1
+    padding:dp(20)
+    spacing:dp(15)
+    radius:dp(25)
+    ripple_behavior: True
+    image:''
+    text:""
+
+    orientation:'vertical'
+    Image:
+        source:root.image
+    MDBoxLayout:
+        orientation:'vertical'
+        MDLabel:
+            halign:"center"
+            text:root.text
+            font_style:"Button"
+
+<ResetPassword>:
+    FloatLayout:
+        orientation: "vertical"
+        MDToolbar:
+            pos_hint: {"top": 1}
+            left_action_items: [["arrow-left", lambda x: root.callback()]]
+            specific_text_color: app.theme_cls.primary_color
+            md_bg_color: 1, 1, 1, 1
+        MDLabel:
+            text: "Insira seu e-mail para redefinir sua senha."
+            font_size: 18
+            bold: True
+            pos_hint: {"center_x": .5, "center_y": .65}
+            halign: "center"
+            id: text_redefined
+        MDTextField:
+            hint_text: "E-mail"
+            pos_hint: {"center_x": .5, "center_y": .5}
+            size_hint_x: .8
+            icon_right: "email"
+            icon_right_color: app.theme_cls.primary_color
+            id: email_confirm
+        MDRaisedButton:
+            text: "Enviar"
+            font_size: 17
+            pos_hint: {"center_x": .5, "center_y": .4}
+            md_bg_color: 0.18, 0.53, 1, 1
+            text_color: 1, 1, 1, 1
+            on_release: root.button_password()
+
+<Register>:
+    FloatLayout:
+        MDToolbar:
+            pos_hint: {"top": 1}
+            left_action_items: [["arrow-left", lambda x: root.callback()]]
+            specific_text_color: app.theme_cls.primary_color
+            md_bg_color: 1, 1, 1, 1
+        MDLabel:
+            text: "Insira seus dados"
+            font_size: 18
+            bold: True
+            pos_hint: {"center_x": .5, "center_y": .8}
+            halign: "center"
+            id: label_register
+        MDTextField:
+            hint_text: "E-mail"
+            pos_hint: {"center_x": .5, "center_y": .7}
+            size_hint_x: .8
+            icon_right: "email"
+            icon_right_color: app.theme_cls.primary_color
+            id: email_register
+        MDTextField:
+            hint_text: "Nome Completo"
+            pos_hint: {"center_x": .5, "center_y": .6}
+            size_hint_x: .8
+            icon_right: "account"
+            icon_right_color: app.theme_cls.primary_color
+            id: name_register
+        MDTextField:
+            hint_text: "CPF"
+            pos_hint: {"center_x": .5, "center_y": .5}
+            size_hint_x: .8
+            icon_right: "id-card"
+            icon_right_color: app.theme_cls.primary_color
+            id: cpf_register
+        MDTextField:
+            hint_text: "Senha"
+            pos_hint: {"center_x": .5, "center_y": .4}
+            size_hint_x: .8
+            icon_right: "lock"
+            icon_right_color: app.theme_cls.primary_color
+            id: password_register
+        MDTextField:
+            hint_text: "Confirmar Senha"
+            pos_hint: {"center_x": .5, "center_y": .3}
+            size_hint_x: .8
+            icon_right: "lock"
+            icon_right_color: app.theme_cls.primary_color
+            id: password_register_confirm
+        MDLabel:
+            text: ""
+            font_size: 12
+            bold: True
+            pos_hint: {"center_x": .5, "center_y": .24}
+            halign: "center"
+            color:0.18, 0.53, 1, 1
+            id: label_sucess
+        MDRaisedButton:
+            text: "Enviar"
+            font_size: 17
+            pos_hint: {"center_x": .5, "center_y": .18}
+            md_bg_color: 0.18, 0.53, 1, 1
+            text_color: 1, 1, 1, 1
+            on_release: root.cadastrar()
+
+<NewPassword>:
+    FloatLayout:
+        MDToolbar:
+            pos_hint: {"top": 1}
+            left_action_items: [["arrow-left", lambda x: root.callback()]]
+            specific_text_color: app.theme_cls.primary_color
+            md_bg_color: 1, 1, 1, 1
+        MDLabel:
+            text: "Insira uma nova senha"
+            font_size: 18
+            bold: True
+            pos_hint: {"center_x": .5, "center_y": .8}
+            halign: "center"
+            id: label_newps
+        MDTextField:
+            hint_text: "Nova Senha"
+            pos_hint: {"center_x": .5, "center_y": .7}
+            size_hint_x: .8
+            icon_right_color: app.theme_cls.primary_color
+            id: label_novasenha
+        MDTextField:
+            hint_text: "Confirmar Senha"
+            pos_hint: {"center_x": .5, "center_y": .6}
+            size_hint_x: .8
+            icon_right_color: app.theme_cls.primary_color
+            id: label_confirma
+        MDLabel:
+            text: ""
+            font_size: 12
+            bold: True
+            pos_hint: {"center_x": .5, "center_y": .24}
+            halign: "center"
+            color:0.18, 0.53, 1, 1
+            id: label_sucesso
+        MDRaisedButton:
+            text: "Enviar"
+            font_size: 17
+            pos_hint: {"center_x": .5, "center_y": .18}
+            md_bg_color: 0.18, 0.53, 1, 1
+            text_color: 1, 1, 1, 1
+            on_release: root.alterar_senha()
+
+<Agendar>:
+    FloatLayout:
+        orientation: "vertical"
+        MDToolbar:
+            pos_hint: {"top": 1}
+            left_action_items: [["arrow-left", lambda x: root.callback()]]
+            specific_text_color: app.theme_cls.primary_color
+            md_bg_color: 1, 1, 1, 1
+        MDFillRoundFlatIconButton:
+            text: "Agendar Retirada"
+            font_size: 20
+            elevation: 8
+            theme_text_color: "Custom"
+            icon: "calendar"
+            text_color: 254/255.0, 254/255.0, 254/255.0, 1
+            md_bg_color: 0.2, 0.7, 0.8, 0.7
+            pos_hint: {"center_x": .5, "center_y": .4}
+            on_release: app.root.current = "agendar_retirada"
+
+        MDFillRoundFlatIconButton:
+            text: "Agendar Consulta"
+            font_size: 20
+            elevation: 8
+            theme_text_color: "Custom"
+            text_color: 254/255.0, 254/255.0, 254/255.0, 1
+            md_bg_color: 0.18, 0.53, 1, 1
+            pos_hint: {"center_x": .5, "center_y": .5}
+            icon: "medical-bag"
+            on_release: app.root.current = "agendar_consulta"
+
+
+
+<AgendamentoConsulta>:
+    FloatLayout:
+        MDToolbar:
+            pos_hint: {"top": 1}
+            left_action_items: [["arrow-left", lambda x: root.callback()]]
+            specific_text_color: app.theme_cls.primary_color
+            md_bg_color: 1, 1, 1, 1
+        MDLabel:
+            text: "Preencha os dados para marcar uma consulta"
+            font_size: 18
+            bold: True
+            pos_hint: {"center_x": .5, "center_y": .7}
+            halign: "center"
+            id: label_agenda
+        MDTextField:
+            hint_text: "CPF do Paciente"
+            pos_hint: {"center_x": .5, "center_y": .6}
+            size_hint_x: .8
+            icon_right: "account"
+            icon_right_color: app.theme_cls.primary_color
+            id: paciente_agenda
+        MDTextField:
+            hint_text: "Especialidade"
+            pos_hint: {"center_x": .5, "center_y": .5}
+            size_hint_x: .8
+            icon_right_color: app.theme_cls.primary_color
+            id: especialidade_agenda
+        MDTextField:
+            hint_text: "Data da Consulta"
+            pos_hint: {"center_x": .5, "center_y": .4}
+            size_hint_x: .8
+            icon_right_color: app.theme_cls.primary_color
+            id: data_agenda
+        MDLabel:
+            text: ""
+            font_size: 12
+            bold: True
+            pos_hint: {"center_x": .5, "center_y": .24}
+            halign: "center"
+            color:0.18, 0.53, 1, 1
+            id: label_agenda
+        MDRaisedButton:
+            text: "Enviar"
+            font_size: 17
+            pos_hint: {"center_x": .5, "center_y": .18}
+            md_bg_color: 0.18, 0.53, 1, 1
+            text_color: 1, 1, 1, 1
+            on_release: root.agendar_consulta()
+
+
+<Agendar>:
+    FloatLayout:
+        orientation: "vertical"
+        MDToolbar:
+            pos_hint: {"top": 1}
+            left_action_items: [["arrow-left", lambda x: root.callback()]]
+            specific_text_color: app.theme_cls.primary_color
+            md_bg_color: 1, 1, 1, 1
+        MDRaisedButton:
+            text: "Agendar Retirada de medicamentos"
+            font_size: 17
+            pos_hint: {"center_x": .5, "center_y": 2}
+            md_bg_color: 0.18, 0.53, 1, 1
+            text_color: 1, 1, 1, 1
+            on_release: app.root.current = "agendar_retirada"
+        MDRaisedButton:
+            text: "Agendar Consulta"
+            font_size: 17
+            pos_hint: {"center_x": .5, "center_y": 3}
+            md_bg_color: 0.18, 0.30, 1, 1
+            text_color: 1, 1, 1, 1
+            on_release: app.root.current = "agendar_consulta"
+
+<AgendamentoRetirada>:
+    FloatLayout:
+        MDToolbar:
+            pos_hint: {"top": 1}
+            left_action_items: [["arrow-left", lambda x: root.callback()]]
+            specific_text_color: app.theme_cls.primary_color
+            md_bg_color: 1, 1, 1, 1
+        MDLabel:
+            text: "Preencha os dados para marcar a \nretirada de um medicamento"
+            font_size: 18
+            bold: True
+            pos_hint: {"center_x": .5, "center_y": .7}
+            halign: "center"
+            id: label_retirada
+        MDTextField:
+            hint_text: "CPF do Paciente"
+            pos_hint: {"center_x": .5, "center_y": .6}
+            size_hint_x: .8
+            icon_right: "account"
+            icon_right_color: app.theme_cls.primary_color
+            id: paciente_retirada
+        MDTextField:
+            hint_text: "Medicamento"
+            pos_hint: {"center_x": .5, "center_y": .5}
+            size_hint_x: .8
+            icon_right_color: app.theme_cls.primary_color
+            id: medicamento_retirada
+        MDTextField:
+            hint_text: "Data da retirada"
+            pos_hint: {"center_x": .5, "center_y": .4}
+            size_hint_x: .8
+            icon_right_color: app.theme_cls.primary_color
+            id: data_retirada
+        MDLabel:
+            text: ""
+            font_size: 12
+            bold: True
+            pos_hint: {"center_x": .5, "center_y": .24}
+            halign: "center"
+            color:0.18, 0.53, 1, 1
+            id: label_retirada
+        MDRaisedButton:
+            text: "Enviar"
+            font_size: 17
+            pos_hint: {"center_x": .5, "center_y": .18}
+            md_bg_color: 0.18, 0.53, 1, 1
+            text_color: 1, 1, 1, 1
+            on_release: root.agendar_retirada()
+
+<TabelaPacientes>:
+    table_box: table_box
+    FloatLayout:
+        MDToolbar:
+            pos_hint: {"top": 1}
+            left_action_items: [["arrow-left", lambda x: root.callback()]]
+            specific_text_color: app.theme_cls.primary_color
+            md_bg_color: 1, 1, 1, 1
+        MDLabel:
+            pos_hint: {"center_x": .5, "top":1}
+            size_hint: .9, .1
+            color: app.theme_cls.primary_color
+            text: "Pacientes"
+            halign: "center"
+            font_style: "H6"
+            text_color: app.theme_cls.primary_color
+
+        MDBoxLayout:
+            id: table_box
+            pos_hint: {"center_x": .5, "top": .9}
+            size_hint: .9, .6
+
+<TabelaMedicamentos>:
+    table_box: table_box
+    FloatLayout:
+        MDToolbar:
+            pos_hint: {"top": 1}
+            left_action_items: [["arrow-left", lambda x: root.callback()]]
+            specific_text_color: app.theme_cls.primary_color
+            md_bg_color: 1, 1, 1, 1
+        MDLabel:
+            pos_hint: {"center_x": .5, "top": 1}
+            size_hint: .9, .1
+            color: app.theme_cls.primary_color
+            text: "Medicamentos"
+            halign: "center"
+            font_style: "H6"
+            text_color: app.theme_cls.primary_color
+
+        MDBoxLayout:
+            orientation: "vertical"
+            padding: dp(60)
+            adaptive_height: True
+
+            MDBoxLayout:
+                id: table_box
+                padding:[dp(0),dp(0),dp(0),dp(0)]
+                pos_hint: {"center_x": .5, "top": .2}
+                size_hint: .6, .6
+            MDLabel:
+                text: ""
+                font_size: 12
+                adaptive_height: True
+                bold: True
+                pos_hint: {"center_x": .5,"center_y": 0.6}
+                halign: "center"
+                color:0.18, 0.53, 1, 1
+                id: label_estoque
+            MDTextField:
+                hint_text: "Quantidade"
+                pos_hint: {"center_x": .5, "center_y": 0.45}
+                size_hint_x: .9
+                id: label_controle
+            
+            MDTextField:
+                hint_text: "ID do medicamento"
+                pos_hint: {"center_x": .5, "center_y": 0.43}
+                size_hint_x: .9
+                id: label_idmed
+            MDBoxLayout:
+            
+                padding:[dp(50),dp(0),dp(0),dp(0)]
+                spacing: dp(5)
+                adaptive_height: True
+                MDRaisedButton:
+                    text: "Entrada"
+                    font_size: 17
+                    pos_hint: {"center_x": .5, "center_y": 0.2}
+                    md_bg_color: 0.18, 0.53, 1, 1
+                    text_color: 1, 1, 1, 1
+                    on_release:root.entrada_meds()
+                MDRaisedButton:
+                    text: "Saída"
+                    font_size: 17
+                    pos_hint: {"center_x": .5, "center_y": 0.2}
+                    md_bg_color: 0.18, 0.53, 1, 1
+                    text_color: 1, 1, 1, 1
+                    on_release:root.saida_meds()
+
+<Perfil>:
+    table_box: table_box
+    FloatLayout:
+        MDToolbar:
+            pos_hint: {"top": 1}
+            left_action_items: [["arrow-left", lambda x: root.callback()]]
+            specific_text_color: app.theme_cls.primary_color
+            md_bg_color: 1, 1, 1, 1
+        MDLabel:
+            pos_hint: {"center_x": .5, "top": 1}
+            size_hint: .9, .1
+            color: app.theme_cls.primary_color
+            text: "Seu Perfil"
+            halign: "center"
+            font_style: "H6"
+            text_color: app.theme_cls.primary_color
+        MDCard:
+            pos_hint: {"center_x": .5, "center_y": .7}
+            padding: dp(20)
+            size_hint_x: .6
+            size_hint_y: .3  
+            MDBoxLayout:
+                orientation: 'vertical'
+                spacing: dp(5)
+                padding: '5dp'
+                Image: 
+                    source: 'img\sperfil.png'
+                MDLabel:
+                    text: ""
+                    size_hint_y: .2
+                    font_style: 'H6'
+                    halign: "center"
+                    id: nome_usu
+                MDLabel:
+                    text:""
+                    size_hint_y: .2
+                    font_size: '15dp'
+                    halign: "center"
+                    id:email_usu
+                MDRaisedButton:
+                    text: "Editar dados"
+                    font_size: 12
+                    size_hint_y: .3
+                    pos_hint: {"center_x": .5, "center_y": 0.2}
+                    md_bg_color: 0.18, 0.53, 1, 1
+                    text_color: 1, 1, 1, 1
+                    on_release:app.root.current = "editar_dados"
+
+        # MDBoxLayout:
+        #     padding: dp(20)
+        #     id:caixa_perfil
+        #     orientation: "horizontal"
+        #     pos_hint: {"center_x": .5, "center_y": .99}
+        #     Image:
+        #         source: "img\sperfil.png"
+        #         size_hint: (.4, .4)
+        #     MDLabel:
+        #         text: "OKAY"
+        #         color: 0,0,0,0
+        #         font_style: "H6"
+        #         id: nome_usu
+        #     MDLabel:
+        #         text: "BELE"
+        #         color: 0,0,0,0
+        #         font_style: "H6"
+        #         id:email_usu
+        MDLabel:
+            color: app.theme_cls.primary_color
+            text: "Agendamentos"
+            halign: "center"
+            font_style: "H6"
+        MDBoxLayout:
+            id: table_box
+            padding:[dp(0),dp(0),dp(0),dp(0)]
+            pos_hint: {"center_x": .5, "top": .4}
+            size_hint: .6, .5
+
+        Image:
+            source: "img\splantao.png"
+            size_hint: .600,.600
+            pos_hint: {"center_x": .5, "center_y": .1}
+
+<EditarDados>:
+    FloatLayout:
+        MDToolbar:
+            pos_hint: {"top": 1}
+            left_action_items: [["arrow-left", lambda x: root.callback()]]
+            specific_text_color: app.theme_cls.primary_color
+            md_bg_color: 1, 1, 1, 1
+        MDLabel:
+            text: "Editar dados"
+            font_size: 18
+            bold: True
+            pos_hint: {"center_x": .5, "center_y": .8}
+            halign: "center"
+            id: label_register
+        MDTextField:
+            hint_text: "Nome"
+            pos_hint: {"center_x": .5, "center_y": .7}
+            size_hint_x: .8
+            icon_right: "account"
+            icon_right_color: app.theme_cls.primary_color
+            id: nome_perfil
+        MDTextField:
+            hint_text: "E-mail"
+            pos_hint: {"center_x": .5, "center_y": .6}
+            size_hint_x: .8
+            icon_right: "email"
+            
+            icon_right_color: app.theme_cls.primary_color
+            id: email_perfil
+        MDTextField:
+            hint_text: "CPF"
+            pos_hint: {"center_x": .5, "center_y": .5}
+            size_hint_x: .8
+            icon_right: "id-card"
+            icon_right_color: app.theme_cls.primary_color
+            id: cpf_perfil
+        MDTextField:
+            hint_text: "Senha"
+            pos_hint: {"center_x": .5, "center_y": .4}
+            size_hint_x: .8
+            icon_right: "lock"
+            icon_right_color: app.theme_cls.primary_color
+            id: senha_perfil
+
+        MDLabel:
+            text: ""
+            font_size: 12
+            bold: True
+            pos_hint: {"center_x": .5, "center_y": .24}
+            halign: "center"
+            color:0.18, 0.53, 1, 1
+            id: alterar_result
+        MDRaisedButton:
+            text: "Enviar"
+            font_size: 17
+            pos_hint: {"center_x": .5, "center_y": .18}
+            md_bg_color: 0.18, 0.53, 1, 1
+            text_color: 1, 1, 1, 1
+            on_release: root.alterar_dados()
