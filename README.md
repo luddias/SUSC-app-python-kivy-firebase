@@ -22,9 +22,9 @@ SUSC
 This app features all the latest tools and practices in mobile development!
 
 - 🐍 **Python** — Linguagem utilizada para desenvolvimento da parte Backend do sistema.
-- 🔰 **Kivy e KivyMD** — Biblioteca que permite a criação de App's para IOS e Android.
+- 🔰 **Kivy e KivyMD** —  Bibliotecas Open Source escrita em Python para o desenvolvimento de aplicações multiplataforma.
 - 🔥 **Firebase** — Banco de dados utilizado para armazenar dados do sistema.
-- 🌀 **Json e Request** — Biblioteca utilizada para fazer a comunicação entre o aplicativo e o banco de dados.
+- 🌀 **Json e Request** — Bibliotecas utilizadas para fazer a comunicação entre o aplicativo e o banco de dados.
 
 ## Getting started
 
