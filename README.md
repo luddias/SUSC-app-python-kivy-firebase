@@ -21,10 +21,10 @@ SUSC
 [//]: # (Add the features of your project here:)
 This app features all the latest tools and practices in mobile development!
 
-- 🐍 **Python** — A JavaScript library for building user interfaces
-- 🔰 **Kivy e KivyMD** — A lib that provides a way to create native apps for Android and iOS
-- 🔥 **Firebase** — A web framework for Node Js
-- 🌀 **Json e Request** — 
+- 🐍 **Python** — Linguagem utilizada para desenvolvimento da parte Backend do sistema.
+- 🔰 **Kivy e KivyMD** — Biblioteca que permite a criação de App's para IOS e Android.
+- 🔥 **Firebase** — Banco de dados utilizado para armazenar dados do sistema.
+- 🌀 **Json e Request** — Biblioteca utilizada para fazer a comunicação entre o aplicativo e o banco de dados.
 
 ## Getting started
 
