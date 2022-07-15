@@ -29,7 +29,7 @@ SUSC
 
 - 🐍 **Python** — Linguagem utilizada para desenvolvimento da parte lógica do sistema.
 - 🔰 **Kivy e KivyMD** —  Bibliotecas Open Source escrita em Python para o desenvolvimento de aplicações multiplataforma.
-- 🔥 **Firebase** — Banco de dados utilizado para armazenar dados do sistema.
+- 🔥 **Firebase** — Plataforma desenvolvida pelo Google para criar aplicativos móveis e web. Foi se utilizado o "Realtime Database" da plataforma como Banco de dados para armazenar dados do sistema.
 - 🌀 **Json e Request** — Bibliotecas utilizadas para fazer a comunicação entre o aplicativo e o banco de dados.
 
 ## Instruções Iniciais
