@@ -10,9 +10,9 @@ SUSC
 
 
 [//]: # (Add your gifs/images here:)
-<div>
-  <img src="IMAGE_1_URL" alt="demo" height="425">
-  <img src="IMAGE_2_URL" alt="demo" height="425">
+<div align="center">
+  <img src="https://github.com/luddias/readmefiles/blob/main/ezgif-5-2f4bd210e9.gif" alt="demo" height="425">
+  <img src="https://github.com/luddias/readmefiles/blob/main/ezgif-5-a8865c3850.gif" alt="demo" height="425">
 </div>
 
 <hr />
