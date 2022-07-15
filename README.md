@@ -10,11 +10,20 @@ SUSC
 
 
 <div align="center">
-  <img src="https://github.com/luddias/readmefiles/blob/main/ezgif-5-2f4bd210e9.gif" alt="demo" height="425">
-  <img src="https://github.com/luddias/readmefiles/blob/main/ezgif-5-a8865c3850.gif" alt="demo" height="425">
+  <img src="https://github.com/luddias/readmefiles/blob/main/lv-0-20220715124253.gif" alt="demo" height="425">
+  <img src="https://github.com/luddias/readmefiles/blob/main/lv-0-20220715123910.gif" alt="demo" height="425">
 </div>
 
 <hr />
+
+## Funcionalidades
+
+- Login, cadastro e redefinição de senha do usuário.
+- Fazer agendamento de retiradas de medicamentos e de consultas médicas.
+- Visualizar próximos agendamentos .
+- Visualizar tabela com dados dos pacientes.
+- Visualizar tabela com dados dos medicamentos, e fazer alteração em quantidades de estoque (entrada e saída).
+
 
 ## Recursos
 This app features all the latest tools and practices in mobile development!
