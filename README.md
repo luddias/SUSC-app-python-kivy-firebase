@@ -26,7 +26,6 @@ SUSC
 
 
 ## Recursos
-This app features all the latest tools and practices in mobile development!
 
 - 🐍 **Python** — Linguagem utilizada para desenvolvimento da parte lógica do sistema.
 - 🔰 **Kivy e KivyMD** —  Bibliotecas Open Source escrita em Python para o desenvolvimento de aplicações multiplataforma.
